@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Clients</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+</head>
+
+<body>
+ <center>
+	<form  action="#" th:action="@{/updateClient}" th:object="${client}" method="post">
+	     <div class="form-group">
+		    <label for="name">nom</label>
+		    <input type="text" th:field="*{nom}" id="nom" placeholder="nom">
+		  </div>
+		  <div class="form-group">  
+		    <label for="prenom">prenom</label>
+		    <input type="text" th:field="*{prenom}" id="prenom" placeholder="prenom">
+		  </div>
+		  <div class="form-group">
+		    <label for="adresse">adresse</label>
+		    <input type="text" th:field="*{adresse}" id="adresse" placeholder="adresse">
+	       </div>
+	       <div class="form-group">
+		    <label for="telephone">telephone</label>
+		     <input type="text" th:field="*{telephone}" id="telephone" placeholder="telephone">
+		   </div>
+		   <div class="form-group"> 
+		    <label for="adresse">email</label>
+		    <input type="text" th:field="*{email}" id="email" placeholder="Email">
+		   </div> 
+		    <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+		    <input class="btn btn-primary" type="submit" value="edit client">   
+	     </form>
+ </center>
+</body>
+</html>
