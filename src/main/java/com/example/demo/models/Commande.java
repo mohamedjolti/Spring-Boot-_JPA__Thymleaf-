@@ -58,6 +58,6 @@ public class Commande {
 
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id", nullable = false)
-    Client client;
+    public Client client;
     
 }

@@ -19,13 +19,15 @@ public class ClientController {
 	@Autowired
 	ClientService clientService;
 	
+	//list clients
     @RequestMapping("/")
-    public String viewemp(Model model){    
+    public String viewClients(Model model){    
         ArrayList<Client> clientList=clientService.getAll();    
         model.addAttribute("clients",clientList);  
         return "list.html";    
     }  
     
+    //display the form to add aclient
     @RequestMapping("/formClient")    
     public String clientform(Model model){    
     	//send an empty object of client to be filled in the form
@@ -33,7 +35,7 @@ public class ClientController {
         return "addClient";    
     }
     
-    
+    //add the client to the DB
     @RequestMapping(value="/addclient",method = RequestMethod.POST)    
     public String save(@ModelAttribute("client") Client client){    
     	//save the client 
@@ -54,5 +56,27 @@ public class ClientController {
         clientService.updateClient(client);    
         return "redirect:/";
     }
+    
+    @RequestMapping("/removeClient/{id}")    
+    public String clientRemove(@PathVariable("id") int id,Model model){    
+    	//get the informatios of the client that should be updated
+    	model.addAttribute("client",clientService.getClient(id));  
+        return "deleteClient";    
+    }
+    
+    
+    @RequestMapping(value="/deleteClient",method = RequestMethod.POST)    
+    public String clientDelete(@ModelAttribute("client") Client client){    
+    	//save the client updated
+        clientService.deleteClient(client.getId());    
+        return "redirect:/";
+    }
+    
+    @RequestMapping("/commandes/{id}")
+    public String viewOrders(@PathVariable("id") int id,Model model){      
+        model.addAttribute("commandes",clientService.getCommandes(id)); 
+        model.addAttribute("clientId",id);
+        return "commandes.html";    
+    }  
 	
 }

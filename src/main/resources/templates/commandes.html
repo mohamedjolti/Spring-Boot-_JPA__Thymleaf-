@@ -12,37 +12,36 @@
 </head>
 
 <body>
-<div th:switch="${clients}" style="margin:auto 5%">
-    <h2 th:case="null">No clients yet!</h2>
+<div th:switch="${commandes}" style="margin:auto 5%">
+    <h2 th:case="null">No Order for this client yet!</h2>
         <div th:case="*">
-            <h2>clients</h2>
+            <h2>Orders</h2>
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Last Name</th>
-                        <th>First Name</th>
-                        <th>Email</th>
-                        <th>Adresse </th>
+                        <th>Order Number</th>
+                        <th>Order Name</th>
+                        <th>Order type</th>
                         <th>Edit</th>
                         <th>Delete</th>
-                        <th>check orders</th>
+                       
                     </tr>
                 </thead>
                 <tbody>
-                <tr th:each="client : ${clients}">
-                    <td th:text="${client.nom}"></td>
-                    <td th:text="${client.prenom}"></td>
-                    <td th:text="${client.email}"></td>
-                     <td th:text="${client.adresse}"></td>
-                    <td><a th:href="@{/editClient/{id}(id=${client.id})}">Edit</a></td>
-                    <td><a th:href="@{/removeClient/{id}(id=${client.id})}">Delete</a></td>
-                    <td><a th:href="@{/commandes/{id}(id=${client.id})}">Orders</a></td>
+                <tr th:each="commande : ${commandes}">
+                    <td th:text="${commande.numero_command}"></td>
+                    <td th:text="${commande.nom_commande}"></td>
+                     <td th:text="${commande.type_command}"></td>
+                    <td><a th:href="@{/editClient/{id}(id=${commande.numero_command})}">Edit</a></td>
+                    <td><a th:href="@{/removeCommande/{numero_commande}(numero_command=${commande.numero_command})}">Delete</a></td>
 
                 </tr>
             </tbody>
         </table>
     </div>      
-    <p><a href="/formClient">Add a new client</a></p>
+    <p><a th:href="@{/commandeForm/{id}(id=${clientId})}">Add a new order for this client</a></p>
+    <p><a href="/">Go back to the list of clients</a></p>
+
 </div>
 </body>
 </html>

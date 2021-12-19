@@ -1,12 +1,14 @@
 package com.example.demo.services;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.DAO.ClientDAO;
 import com.example.demo.models.Client;
+import com.example.demo.models.Commande;
 
 //the service  for the consuming the DAO interface 
 @Service
@@ -36,4 +38,8 @@ public class ClientService {
 		clientDAO.deleteById(clientId);
 	}
 	
+	public Set<Commande> getCommandes(Integer clientId) {
+	    Client client=clientDAO.getById(clientId);
+	    return client.getCommandes();
+	}
 }

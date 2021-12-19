@@ -1,11 +1,16 @@
 package com.example.demo.models;
 
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -26,6 +31,18 @@ public class Client {
 	@Column 
 	private String telephone;
 	
+	 @OneToMany(mappedBy = "client", fetch = FetchType.LAZY,
+	 cascade = CascadeType.ALL)
+	 private Set<Commande> commandes;
+	
+	public Set<Commande> getCommandes() {
+		return commandes;
+	}
+
+	public void setCommandes(Set<Commande> commandes) {
+		this.commandes = commandes;
+	}
+
 	public Integer getId() {
 		return id;
 	}
