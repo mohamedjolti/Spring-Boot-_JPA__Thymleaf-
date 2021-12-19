@@ -12,8 +12,8 @@
 
 <body>
  <center>
-	<form  action="#" th:action="@{/addCommande}" th:object="${commande}" method="post">
-	    <h2 th:text="'add order to the client '+${commande.client.getNom()}+' '+ ${commande.client.getPrenom()}"></h2>
+	<form  action="#" th:action="@{/updateCommande}" th:object="${commande}" method="post">
+	    <h2 th:text="'edit orders of the client'+${commande.client.getNom()}+${commande.client.getPrenom}"></h2>
 	     <div class="form-group">
 		    <label for="nom_commande">order name</label>
 		    <input type="text" th:field="*{nom_commande}" id="nom" placeholder="order name">
@@ -22,8 +22,10 @@
 		    <label for="type_commande">order type</label>
 		    <input type="text" th:field="*{type_command}" id="prenom" placeholder="order type">
 		  </div>
-		  		    <input type="hidden" th:field="*{client}" >
-	      <input class="btn btn-primary" type="submit" value="add order to this client">   
+		  <input type="hidden" th:field="*{client}" >
+		  <input type="hidden" th:field="*{numero_command}" >
+
+	      <input class="btn btn-primary" type="submit" value="edit order to this client">   
 	     </form>
  </center>
 </body>

@@ -25,7 +25,12 @@ public class CommandeService {
 	public void deleteCommande(Integer numero_command) {
 		commandeDAO.deleteById(numero_command);;
 	}
+	
+	public void updateCommande(Commande commande) {
+		commandeDAO.save(commande);
+	}
      
+	
 	
 	
 

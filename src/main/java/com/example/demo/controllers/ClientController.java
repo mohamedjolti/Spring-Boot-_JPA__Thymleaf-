@@ -36,7 +36,7 @@ public class ClientController {
     }
     
     //add the client to the DB
-    @RequestMapping(value="/addclient",method = RequestMethod.POST)    
+    @RequestMapping(value="/addClient",method = RequestMethod.POST)    
     public String save(@ModelAttribute("client") Client client){    
     	//save the client 
         clientService.addClient(client);    
@@ -75,7 +75,7 @@ public class ClientController {
     @RequestMapping("/commandes/{id}")
     public String viewOrders(@PathVariable("id") int id,Model model){      
         model.addAttribute("commandes",clientService.getCommandes(id)); 
-        model.addAttribute("clientId",id);
+        model.addAttribute("client",clientService.getClient(id));
         return "commandes.html";    
     }  
 	

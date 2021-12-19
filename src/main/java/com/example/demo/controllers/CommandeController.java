@@ -20,7 +20,9 @@ public class CommandeController {
 	   CommandeService commandeService;
 	   @Autowired 
 	   ClientService clientService;
-	    @RequestMapping("/commandeForm/{id}")    
+	    
+	   
+	   @RequestMapping("/commandeForm/{id}")    
 	    public String commandeform(@PathVariable("id") int id,Model model){    
 	    	//send an empty object of client to be filled in the form
 	    	Commande commande=new Commande();
@@ -37,10 +39,10 @@ public class CommandeController {
 	        return "redirect:/commandes/"+commande.client.getId();
 	    }
 	    
-	    @RequestMapping("/removeCommande/{numero_command}")    
-	    public String clientRemove(@PathVariable("numero_command") int numero_command,Model model){    
+	    @RequestMapping("/removeCommande/{id}")    
+	    public String clientRemove(@PathVariable("id") int id,Model model){    
 	    	//get the informatios of the client that should be updated
-	    	model.addAttribute("commande",commandeService.getCommande(numero_command));  
+	    	model.addAttribute("commande",commandeService.getCommande(id));  
 	        return "deleteCommande";    
 	    }
 	    
@@ -48,7 +50,24 @@ public class CommandeController {
 	    @RequestMapping(value="/deleteCommande",method = RequestMethod.POST)    
 	    public String clientDelete(@ModelAttribute("commande") Commande commande){    
 	    	//save the client updated
-	        commandeService.deleteCommande(commande.getNumero_command());    
-	        return "redirect:/";
+	    	Integer clientId=commande.client.getId();
+	        commandeService.deleteCommande(commande.getNumero_command());
+	        return "redirect:/commandes/"+clientId;
+	    }
+	    
+	    
+	    @RequestMapping("/editCommande/{id}")    
+	    public String editCommande(@PathVariable("id") int id,Model model){    
+	    	//send the object of commande to be changed in the form
+	    	model.addAttribute("commande",commandeService.getCommande(id));  
+	        return "editCommande";    
+	    }
+	    
+	    //update the commande to the DB
+	    @RequestMapping(value="/updateCommande",method = RequestMethod.POST)    
+	    public String updateCommande(@ModelAttribute("commande") Commande commande){    
+	    	//save the client 
+	        commandeService.updateCommande(commande);    
+	        return "redirect:/commandes/"+commande.client.getId();
 	    }
 }

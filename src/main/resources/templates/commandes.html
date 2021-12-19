@@ -15,7 +15,7 @@
 <div th:switch="${commandes}" style="margin:auto 5%">
     <h2 th:case="null">No Order for this client yet!</h2>
         <div th:case="*">
-            <h2>Orders</h2>
+          <h2>orders of the client <span th:text="${client.nom}+' '+${client.prenom}"></span></h2>
             <table class="table">
                 <thead>
                     <tr>
@@ -32,14 +32,14 @@
                     <td th:text="${commande.numero_command}"></td>
                     <td th:text="${commande.nom_commande}"></td>
                      <td th:text="${commande.type_command}"></td>
-                    <td><a th:href="@{/editClient/{id}(id=${commande.numero_command})}">Edit</a></td>
-                    <td><a th:href="@{/removeCommande/{numero_commande}(numero_command=${commande.numero_command})}">Delete</a></td>
+                    <td><a th:href="@{/editCommande/{id}(id=${commande.numero_command})}">Edit</a></td>
+                    <td><a th:href="@{/removeCommande/{id}(id=${commande.numero_command})}">Delete</a></td>
 
                 </tr>
             </tbody>
         </table>
     </div>      
-    <p><a th:href="@{/commandeForm/{id}(id=${clientId})}">Add a new order for this client</a></p>
+    <p><a th:href="@{/commandeForm/{id}(id=${client.id})}">Add a new order for this client</a></p>
     <p><a href="/">Go back to the list of clients</a></p>
 
 </div>
