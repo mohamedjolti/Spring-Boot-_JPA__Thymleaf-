@@ -12,7 +12,7 @@
 </head>
 
 <body>
-<div th:switch="${clients}">
+<div th:switch="${clients}" style="margin:auto 5%">
     <h2 th:case="null">No clients yet!</h2>
         <div th:case="*">
             <h2>clients</h2>
